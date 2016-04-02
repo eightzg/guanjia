@@ -1,0 +1,36 @@
+
+/* Class = "UITextField"; placeholder = "实验室密码"; ObjectID = "3Uz-Tg-odV"; */
+"3Uz-Tg-odV.placeholder" = "实验室密码";
+
+/* Class = "UITextField"; placeholder = "密码"; ObjectID = "801-CF-aFV"; */
+"801-CF-aFV.placeholder" = "密码";
+
+/* Class = "UINavigationItem"; title = "用户注册"; ObjectID = "TUH-RY-fVQ"; */
+"TUH-RY-fVQ.title" = "用户注册";
+
+/* Class = "UINavigationItem"; title = "登录"; ObjectID = "Trk-eB-C26"; */
+"Trk-eB-C26.title" = "登录";
+
+/* Class = "UITextField"; placeholder = "请输入登录密码"; ObjectID = "VFC-7F-aIF"; */
+"VFC-7F-aIF.placeholder" = "请输入登录密码";
+
+/* Class = "UIButton"; normalTitle = "注册"; ObjectID = "Yq6-Qf-WNc"; */
+"Yq6-Qf-WNc.normalTitle" = "注册";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "aAX-4b-lnL"; */
+"aAX-4b-lnL.normalTitle" = "登录";
+
+/* Class = "UIButton"; normalTitle = "忘记密码"; ObjectID = "arp-WF-tgf"; */
+"arp-WF-tgf.normalTitle" = "忘记密码";
+
+/* Class = "UITextField"; placeholder = "请输入用户名"; ObjectID = "ckE-rL-boo"; */
+"ckE-rL-boo.placeholder" = "请输入用户名";
+
+/* Class = "UITextField"; placeholder = "请输入用户名"; ObjectID = "e5h-ox-zhi"; */
+"e5h-ox-zhi.placeholder" = "请输入用户名";
+
+/* Class = "UIBarButtonItem"; title = "注册"; ObjectID = "iWL-8E-b1D"; */
+"iWL-8E-b1D.title" = "注册";
+
+/* Class = "UITextField"; placeholder = "确认密码"; ObjectID = "jb5-R2-2dv"; */
+"jb5-R2-2dv.placeholder" = "确认密码";

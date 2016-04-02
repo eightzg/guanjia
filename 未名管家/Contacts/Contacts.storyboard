@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2xb-CH-65d">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--联系人-->
+        <scene sceneID="tFM-Dg-CFl">
+            <objects>
+                <tableViewController id="3qE-Si-DHY" customClass="ContactsVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ucN-f6-1GL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="wvU-MV-Rgy">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wvU-MV-Rgy" id="88r-fs-Kcb">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3qE-Si-DHY" id="fsF-HN-fMH"/>
+                            <outlet property="delegate" destination="3qE-Si-DHY" id="I9N-WP-YKb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="联系人" id="cEt-yL-hh9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1iG-Um-0Rk">
+                            <connections>
+                                <segue destination="32b-wO-egt" kind="push" id="hmJ-Qz-p9l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6vt-tv-fZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="164" y="283"/>
+        </scene>
+        <!--Add FriendVC-->
+        <scene sceneID="UnY-Ir-ENe">
+            <objects>
+                <viewController id="32b-wO-egt" customClass="AddFriendVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CGX-5x-0ee"/>
+                        <viewControllerLayoutGuide type="bottom" id="frx-3K-40f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GQf-cc-hMy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入好友ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5t-5z-sKc">
+                                <rect key="frame" x="251" y="152" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dqK-vL-FVc"/>
+                                    <constraint firstAttribute="width" constant="97" id="iI9-KX-BwI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAg-j8-uZZ">
+                                <rect key="frame" x="277" y="230" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="170-nK-3KH"/>
+                                    <constraint firstAttribute="width" constant="46" id="IMf-Hz-gM9"/>
+                                </constraints>
+                                <state key="normal" title="添加"/>
+                                <connections>
+                                    <action selector="addFriend:" destination="32b-wO-egt" eventType="touchUpInside" id="1cv-Rp-Puh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xAg-j8-uZZ" firstAttribute="top" secondItem="E5t-5z-sKc" secondAttribute="bottom" constant="48" id="3AE-KW-bDA"/>
+                            <constraint firstItem="E5t-5z-sKc" firstAttribute="top" secondItem="CGX-5x-0ee" secondAttribute="bottom" constant="88" id="ATG-LO-3sR"/>
+                            <constraint firstItem="E5t-5z-sKc" firstAttribute="centerX" secondItem="GQf-cc-hMy" secondAttribute="centerX" id="KIn-0U-Z0k"/>
+                            <constraint firstItem="xAg-j8-uZZ" firstAttribute="centerX" secondItem="GQf-cc-hMy" secondAttribute="centerX" id="UqO-Rr-cLm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vfd-vQ-NPS"/>
+                    <connections>
+                        <outlet property="textField" destination="E5t-5z-sKc" id="drv-eE-crZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2bh-lW-6G1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956" y="283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0wW-Rr-ieC">
+            <objects>
+                <navigationController id="2xb-CH-65d" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6PH-Vj-mFw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3qE-Si-DHY" kind="relationship" relationship="rootViewController" id="RV1-Us-7IZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oFY-20-A5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-656" y="283"/>
+        </scene>
+    </scenes>
+</document>
