@@ -75,10 +75,11 @@ static NSString * const ID = @"cell";
                        @"16-18",
                        @"18-20",
                        @"20-22"];
-    //初始化日期数组
-    self.dateArray = [NSMutableArray array];
     //1,初始化布局
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 1;
     
     //2.初始化collectionView
     self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, HKWidth, HKWidth) collectionViewLayout:layout];
@@ -94,126 +95,34 @@ static NSString * const ID = @"cell";
 }
 //初始化视图
 - (void)loadViewsWithWeekChanged:(int)week {
-    UIColor *randomColor = [UIColor randomColor];
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+    //初始化日期数组
+    self.dateArray = [NSMutableArray array];
+    self.userArray = [NSMutableArray array];
     for (NSMutableDictionary *dict in g().userArray) {
         [self.userArray addObject:dict];
     }
-//    [self.mainCollectionView reloadData];
-    
-    return;
-    
-    //创建九宫格视图
-    CGFloat padding = 0.5;
-    CGFloat width = ([UIScreen mainScreen].bounds.size.width - padding * 7) / 8;
-    CGFloat height = width;
-    
-    for (int i = 0; i < 64; i++) {
-        // 计算位置
-        int row = i/8;
-        int column = i%8;
-        CGFloat x = padding + column * (width + padding);
-        CGFloat y = padding + row * (height + padding);
-        UIButton *button = [[UIButton alloc] init];
-        button.frame = CGRectMake(x, y, width, height);
-        button.titleLabel.font = [UIFont systemFontOfSize:13];
-        //设置按钮文字换行
-        button.titleLabel.lineBreakMode = UIBaselineAdjustmentAlignBaselines;
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:randomColor];
-        button.tag = i;
-        
-        if (i == 0) {
-            button.enabled = NO;
-            NSString *year = [NSString stringOfYearWithDaysInterval:week];
-            [button setTitle:year forState:UIControlStateNormal];
-        }
-        else if (i > 0 && i < 8) {
-            //第一行除了第0个位置，都填充时间信息
-            NSString *theDayStr = [NSString stringWithDaysInterval:i-1+week];
-            //把当前一周的时间字符串保存到数组
-            [self.dateArray addObject:theDayStr];
-            [button setTitle:theDayStr forState:UIControlStateNormal];
-            button.enabled = NO;
-        }else if (i % 8 == 0 && i != 0) {
-            //第一列除了第0个位置，都填充时间段信息
-            [button setTitle:[NSString stringWithFormat:@"%@",self.timeArray[i / 8 - 1]] forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
-            button.enabled = NO;
-        }
-        else {
-            [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-            //禁用已经预定的日期和时间段对应的按钮,并且设置标题内容
-            for (int j = 0; j < self.userArray.count; j ++) {
-                NSDictionary *dict = self.userArray[j];
-                long tag = [[dict objectForKey:@"tag"] longValue];
-                long row = [self rowFormTag:tag];
-                
-                NSString *dateStr = [NSString stringWithFormat:@"%@",[dict objectForKey:@"date"]];
-                long currentTag = 0;
-                //获取数据库查询的日期，如果和当前的一周时间匹配，设置按钮状态
-                if ([dateStr isEqualToString:self.dateArray[0]]) {
-                    currentTag = [self tagFromRow:row andCol:1];
-                }else if ([dateStr isEqualToString:self.dateArray[1]]) {
-                    currentTag = [self tagFromRow:row andCol:2];
-                }else if ([dateStr isEqualToString:self.dateArray[2]]) {
-                    currentTag = [self tagFromRow:row andCol:3];
-                }else if ([dateStr isEqualToString:self.dateArray[3]]) {
-                    currentTag = [self tagFromRow:row andCol:4];
-                }else if ([dateStr isEqualToString:self.dateArray[4]]) {
-                    currentTag = [self tagFromRow:row andCol:5];
-                }else if ([dateStr isEqualToString:self.dateArray[5]]) {
-                    currentTag = [self tagFromRow:row andCol:6];
-                }else if ([dateStr isEqualToString:self.dateArray[6]]) {
-                    currentTag = [self tagFromRow:row andCol:7];
-                }else {
-                    currentTag = 70;
-                }   
-                
-                UIButton *btn = (UIButton *)[self.contentView viewWithTag:currentTag];
-                //用户名和原因
-                NSString *content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];
-                [btn setTitle:content forState:UIControlStateNormal];
-                button.titleLabel.font = [UIFont systemFontOfSize:13];
-                //文字换行
-                button.titleLabel.lineBreakMode = UIBaselineAdjustmentAlignBaselines;
-                btn.enabled = NO;
-            }
-        }
-        
-        [self.contentView addSubview:button];
-    }
+    [self.mainCollectionView reloadData];
 }
 
 #pragma mark - actions
-//列表按钮点击
-- (void)buttonClicked:(UIButton *)button{
-
-}
-
-
-
 //左侧按钮点击
 - (IBAction)leftBtnClicked:(id)sender {
-    //把所有的子视图从父视图中移除
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.weekNum -= 7;
     [self loadViewsWithWeekChanged:self.weekNum];
+    [self.mainCollectionView reloadData];
 }
 
 //右侧按钮点击
 - (IBAction)rightBtnClicked:(id)sender {
-    //把所有的子视图从父视图中移除
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.weekNum += 7;
     [self loadViewsWithWeekChanged:self.weekNum];
+    [self.mainCollectionView reloadData];
 }
 - (IBAction)backToNowClicked:(id)sender {
-    //把所有的子视图从父视图中移除
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.weekNum = 0;
     [self loadViewsWithWeekChanged:self.weekNum];
+    [self.mainCollectionView reloadData];
 }
 
 //注销按钮点击
@@ -351,6 +260,7 @@ static NSString * const ID = @"cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+
     
     if (indexPath.item == 0) {
         cell.commonLabel.text = [NSString stringOfYearWithDaysInterval:self.weekNum];
@@ -365,7 +275,45 @@ static NSString * const ID = @"cell";
     }else if (indexPath.item % 8 == 0 && indexPath.item != 0) {
         cell.commonLabel.text = self.timeArray[indexPath.item / 8 - 1];
     }else {
-        cell.commonLabel.text = @"加油";
+        cell.commonLabel.text = @"";
+        
+        NSLog(@">>>>>>>>>%zd",self.userArray.count);
+        
+        //禁用已经预定的日期和时间段对应的按钮,并且设置标题内容
+        for (int j = 0; j < self.userArray.count; j ++) {
+            NSDictionary *dict = self.userArray[j];
+            long tag = [[dict objectForKey:@"tag"] longValue];
+            long row = [self rowFormTag:tag];
+            
+            NSString *dateStr = [NSString stringWithFormat:@"%@",[dict objectForKey:@"date"]];
+            long currentTag = 0;
+            //获取数据库查询的日期，如果和当前的一周时间匹配，设置按钮状态
+            if ([dateStr isEqualToString:self.dateArray[0]]) {
+                currentTag = [self tagFromRow:row andCol:1];
+            }else if ([dateStr isEqualToString:self.dateArray[1]]) {
+                currentTag = [self tagFromRow:row andCol:2];
+            }else if ([dateStr isEqualToString:self.dateArray[2]]) {
+                currentTag = [self tagFromRow:row andCol:3];
+            }else if ([dateStr isEqualToString:self.dateArray[3]]) {
+                currentTag = [self tagFromRow:row andCol:4];
+            }else if ([dateStr isEqualToString:self.dateArray[4]]) {
+                currentTag = [self tagFromRow:row andCol:5];
+            }else if ([dateStr isEqualToString:self.dateArray[5]]) {
+                currentTag = [self tagFromRow:row andCol:6];
+            }else if ([dateStr isEqualToString:self.dateArray[6]]) {
+                currentTag = [self tagFromRow:row andCol:7];
+            }
+            
+//            NSLog(@"currentTag%zd",currentTag);
+            NSLog(@"dateArray%@",self.dateArray);
+            
+            //用户名和原因
+            NSString *content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];
+            if (indexPath.item == currentTag) {
+                cell.commonLabel.text = content;
+            }
+        }
+
     }
     
     cell.backgroundColor = [UIColor colorWithRed:220/255.f green:220/255.f blue:220/255.f alpha:1];
@@ -380,26 +328,16 @@ static NSString * const ID = @"cell";
     return CGSizeMake(width, width);
 }
 
-//设置每个item水平间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 1;
-}
-
-
-//设置每个item垂直间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 1;
-}
-
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //如果不是点击区域，让item没有响应
     
-
+    if (cell.commonLabel.text.length > 1) {
+        [MBProgressHUD showError:@"哎呀,已经被预定啦！" toView:self.view];
+        return;
+    }
     
     if (indexPath.item % 8 == 0 || (indexPath.item>0 && indexPath.item<8)) return;
     cell.backgroundColor = [UIColor grayColor];
