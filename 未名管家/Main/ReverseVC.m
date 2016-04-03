@@ -5,6 +5,7 @@
 //  Created by apple on 15/11/18.
 //  Copyright (c) 2015年 eight. All rights reserved.
 //
+#define HKWidth [UIScreen mainScreen].bounds.size.width
 
 #import "ReverseVC.h"
 #import "LoginVC.h"
@@ -13,6 +14,7 @@
 #import "HistoryVC.h"
 #import "ComObj.h"
 #import "UIColor+Random.h"
+#import "MyCollectionViewCell.h"
 
 #import <BmobUser.h>
 #import <BmobObject.h>
@@ -21,7 +23,7 @@
 
 #import <EaseMobSDKFull/EaseMob.h>
 
-@interface ReverseVC () <UIAlertViewDelegate, UIActionSheetDelegate, BmobEventDelegate>
+@interface ReverseVC () <UIAlertViewDelegate, UIActionSheetDelegate, BmobEventDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 //时间段数组
 @property (nonatomic, strong) NSArray *timeArray;
@@ -43,9 +45,15 @@
 //用来存放当前一周的日期和星期
 @property (nonatomic, strong) NSMutableArray *dateArray;
 
+/**
+ *  collectionView
+ */
+@property (nonatomic, strong) UICollectionView *mainCollectionView;
+
 @end
 
 @implementation ReverseVC
+static NSString * const ID = @"cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,6 +75,20 @@
                        @"16-18",
                        @"18-20",
                        @"20-22"];
+    //1,初始化布局
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    
+    //2.初始化collectionView
+    self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, HKWidth, HKWidth) collectionViewLayout:layout];
+    self.mainCollectionView.backgroundColor = [UIColor whiteColor];
+    //3.注册collectionViewCell
+    [self.mainCollectionView registerClass:[MyCollectionViewCell class] forCellWithReuseIdentifier:ID];
+    
+    //4.设置代理,数据源
+    self.mainCollectionView.delegate = self;
+    self.mainCollectionView.dataSource = self;
+    
+    [self.view addSubview:self.mainCollectionView];
 }
 //初始化视图
 - (void)loadViewsWithWeekChanged:(int)week {
@@ -79,6 +101,9 @@
     for (NSMutableDictionary *dict in g().userArray) {
         [self.userArray addObject:dict];
     }
+    [self.mainCollectionView reloadData];
+    
+    return;
     
     //创建九宫格视图
     CGFloat padding = 0.5;
@@ -340,6 +365,69 @@
 - (long)colFromTag:(long)tag {
     long col = tag % 8;
     return col;
+}
+
+#pragma mark - collectionView代理方法
+
+//每个section的item个数
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 64;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    MyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+    if (indexPath.item == 0) {
+        cell.commonLabel.text = [NSString stringOfYearWithDaysInterval:self.weekNum];
+    }else if (indexPath.item > 0 && indexPath.item < 8) {
+        //第一行除了第0个位置，都填充时间信息
+        NSString *theDayStr = [NSString stringWithDaysInterval:(int)(indexPath.item-1+self.weekNum)];
+        //把当前一周的时间字符串保存到数组
+        [self.dateArray addObject:theDayStr];
+        cell.commonLabel.text = theDayStr;
+    }else if (indexPath.item % 8 == 0 && indexPath.item != 0) {
+        cell.commonLabel.text = self.timeArray[indexPath.item / 8 - 1];
+    }else {
+        
+    }
+    
+    cell.backgroundColor = [UIColor colorWithRed:220/255.f green:220/255.f blue:220/255.f alpha:1];
+    
+    return cell;
+}
+
+//设置每个item的尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    long width = (HKWidth - 7)/8;
+    return CGSizeMake(width, width);
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+
+
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+
+//点击item方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    //如果不是点击区域，让item没有响应
+    if (indexPath.item % 8 == 0 || (indexPath.item>0 && indexPath.item<8)) return;
+    //设置按钮文字
+    cell.userLabel.text = @"eight";
+    cell.reasonLabel.text = @"coding";
+    cell.backgroundColor = [UIColor grayColor];
 }
 
 
