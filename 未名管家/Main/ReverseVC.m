@@ -75,6 +75,8 @@ static NSString * const ID = @"cell";
                        @"16-18",
                        @"18-20",
                        @"20-22"];
+    //初始化日期数组
+    self.dateArray = [NSMutableArray array];
     //1,初始化布局
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
@@ -94,14 +96,11 @@ static NSString * const ID = @"cell";
 - (void)loadViewsWithWeekChanged:(int)week {
     UIColor *randomColor = [UIColor randomColor];
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    //初始化数组
-    self.userArray = [NSMutableArray array];
-    self.dateArray = [NSMutableArray array];
     
     for (NSMutableDictionary *dict in g().userArray) {
         [self.userArray addObject:dict];
     }
-    [self.mainCollectionView reloadData];
+//    [self.mainCollectionView reloadData];
     
     return;
     
@@ -187,44 +186,13 @@ static NSString * const ID = @"cell";
     }
 }
 
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        //点击确定获取文本框的内容
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        if ([textField.text isEqualToString:@""]) {
-            [MBProgressHUD showError:@"原因不得为空" toView:self.view];
-            return;
-        }else if (textField.text.length > 4) {
-            [MBProgressHUD showError:@"原因过长" toView:self.view];
-            return;
-        }
-        //保存到数据库
-        [self saveToBmobWithName:self.user period:self.peroidStr date:self.dateStr reason:textField.text andTag:self.tag];
-        [MBProgressHUD showSuccess:@"预订成功" toView:self.view];
-    }
-}
-
 #pragma mark - actions
 //列表按钮点击
 - (void)buttonClicked:(UIButton *)button{
-    UIButton *btn = (UIButton *)[self.contentView viewWithTag:button.tag];
-    self.user = [BmobUser getCurrentUser].username;
-    //计算的是第几行第几列
-    long row = btn.tag / 8;
-    long col = btn.tag % 8;
-    self.peroidStr = self.timeArray[row - 1];
-    //获取顶部的日期按钮
-    UIButton *startBtn = (UIButton *)[self.contentView viewWithTag:col];
-    //获取顶部的日期按钮的文字
-    self.dateStr = startBtn.titleLabel.text;
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请输入要占用实验室的理由" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    //保存button的tag到全局属性
-    self.tag = button.tag;
-    [alert show];
+
 }
+
+
 
 //左侧按钮点击
 - (IBAction)leftBtnClicked:(id)sender {
@@ -298,6 +266,7 @@ static NSString * const ID = @"cell";
     [timeObj setObject:dateStr forKey:@"date"];
     [timeObj setObject:reason forKey:@"reason"];
     
+    //保存预定那天的日期和时间段到数据库，便于预订历史的排序
     NSString *month = [dateStr substringWithRange:NSMakeRange(0, 2)];
     NSString *day = [dateStr substringWithRange:NSMakeRange(3, 2)];
     NSString *hour = [periodStr substringWithRange:NSMakeRange(0, 2)];
@@ -309,7 +278,6 @@ static NSString * const ID = @"cell";
             //打印objectId
             NSLog(@"objectid :%@",timeObj);
         } else if (error){
-            //发生错误后的动作
             NSLog(@"%@",error);
         } else {
             NSLog(@"Unknow error");
@@ -326,10 +294,15 @@ static NSString * const ID = @"cell";
             NSLog(@"error is:%@",error);
         } else{
             g().userArray = array;
+//            NSLog(@"**********%@",array);
             [self loadViewsWithWeekChanged:self.weekNum];
         }
     }];
 }
+
+
+
+#pragma mark - BmobEvent Delegate
 
 //连接到服务器进行监听
 - (void)listen{
@@ -339,12 +312,12 @@ static NSString * const ID = @"cell";
     [self.bmobEvent start];
 }
 
-#pragma mark - BmobEvent Delegate
 //可以进行监听或者取消监听事件
 -(void)bmobEventCanStartListen:(BmobEvent *)event{
     //监听Post表更新
     [self.bmobEvent listenTableChange:BmobActionTypeUpdateTable tableName:@"Time"];
 }
+
 //接收到得数据
 -(void)bmobEvent:(BmobEvent *)event didReceiveMessage:(NSString *)message{
     //更新数据
@@ -377,8 +350,8 @@ static NSString * const ID = @"cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     MyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+    
     if (indexPath.item == 0) {
         cell.commonLabel.text = [NSString stringOfYearWithDaysInterval:self.weekNum];
     }else if (indexPath.item > 0 && indexPath.item < 8) {
@@ -387,10 +360,12 @@ static NSString * const ID = @"cell";
         //把当前一周的时间字符串保存到数组
         [self.dateArray addObject:theDayStr];
         cell.commonLabel.text = theDayStr;
+        
+        
     }else if (indexPath.item % 8 == 0 && indexPath.item != 0) {
         cell.commonLabel.text = self.timeArray[indexPath.item / 8 - 1];
     }else {
-        
+        cell.commonLabel.text = @"加油";
     }
     
     cell.backgroundColor = [UIColor colorWithRed:220/255.f green:220/255.f blue:220/255.f alpha:1];
@@ -423,11 +398,46 @@ static NSString * const ID = @"cell";
 {
     MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //如果不是点击区域，让item没有响应
+    
+
+    
     if (indexPath.item % 8 == 0 || (indexPath.item>0 && indexPath.item<8)) return;
-    //设置按钮文字
-    cell.userLabel.text = @"eight";
-    cell.reasonLabel.text = @"coding";
     cell.backgroundColor = [UIColor grayColor];
+    
+    self.user = [BmobUser getCurrentUser].username;
+    //计算的是第几行第几列
+    long row = indexPath.item / 8;
+    long col = indexPath.item % 8;
+    
+    //保存当前点击的cell的位置
+    self.tag = indexPath.item;
+    self.peroidStr = self.timeArray[row - 1];
+    self.dateStr = self.dateArray[col-1];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请输入要占用实验室的理由" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+
+    
+    NSLog(@">>>>>>%zd>>>>%@>>>>>%@",self.tag, self.peroidStr, self.dateStr);
+    [alert show];
+    
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        //点击确定获取文本框的内容
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        if ([textField.text isEqualToString:@""]) {
+            [MBProgressHUD showError:@"原因不得为空" toView:self.view];
+            return;
+        }else if (textField.text.length > 4) {
+            [MBProgressHUD showError:@"原因过长" toView:self.view];
+            return;
+        }
+        //保存到数据库
+        [self saveToBmobWithName:self.user period:self.peroidStr date:self.dateStr reason:textField.text andTag:self.tag];
+        [MBProgressHUD showSuccess:@"预订成功" toView:self.view];
+    }
 }
 
 
