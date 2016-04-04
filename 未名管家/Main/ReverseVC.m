@@ -29,7 +29,6 @@
 @property (nonatomic, strong) NSArray *timeArray;
 //当前页码
 @property (nonatomic, assign) int weekNum;
-@property (nonatomic, assign) long col;
 //当前用户名
 @property (nonatomic, copy) NSString *user;
 //时间段
@@ -49,6 +48,7 @@
  *  collectionView
  */
 @property (nonatomic, strong) UICollectionView *mainCollectionView;
+@property (nonatomic, strong) UIColor *currentColor;
 
 @end
 
@@ -59,7 +59,6 @@ static NSString * const ID = @"cell";
     [super viewDidLoad];
     //初始化当前页码
     self.weekNum = 0;
-    self.col = 0;
     //查询数据库
     [self getDataFromBmob];
     //监听数据改变
@@ -81,6 +80,9 @@ static NSString * const ID = @"cell";
     layout.minimumInteritemSpacing = 1;
     layout.minimumLineSpacing = 1;
     
+    long width = (HKWidth - 7)/8;
+    layout.itemSize = CGSizeMake(width, width);
+    
     //2.初始化collectionView
     self.mainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, HKWidth, HKWidth) collectionViewLayout:layout];
     self.mainCollectionView.backgroundColor = [UIColor whiteColor];
@@ -94,7 +96,7 @@ static NSString * const ID = @"cell";
     [self.view addSubview:self.mainCollectionView];
 }
 //初始化视图
-- (void)loadViewsWithWeekChanged:(int)week {
+- (void)loadViews{
     
     //初始化日期数组
     self.dateArray = [NSMutableArray array];
@@ -109,20 +111,17 @@ static NSString * const ID = @"cell";
 //左侧按钮点击
 - (IBAction)leftBtnClicked:(id)sender {
     self.weekNum -= 7;
-    [self loadViewsWithWeekChanged:self.weekNum];
-    [self.mainCollectionView reloadData];
+    [self loadViews];
 }
 
 //右侧按钮点击
 - (IBAction)rightBtnClicked:(id)sender {
     self.weekNum += 7;
-    [self loadViewsWithWeekChanged:self.weekNum];
-    [self.mainCollectionView reloadData];
+    [self loadViews];
 }
 - (IBAction)backToNowClicked:(id)sender {
     self.weekNum = 0;
-    [self loadViewsWithWeekChanged:self.weekNum];
-    [self.mainCollectionView reloadData];
+    [self loadViews];
 }
 
 //注销按钮点击
@@ -196,6 +195,8 @@ static NSString * const ID = @"cell";
 
 //从数据库查询
 - (void)getDataFromBmob {
+    [MBProgressHUD showMessage:@"加载中..." toView:self.mainCollectionView];
+    self.currentColor = [UIColor randomColor];
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"Time"];
     //查找GameScore表的数据
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
@@ -203,13 +204,11 @@ static NSString * const ID = @"cell";
             NSLog(@"error is:%@",error);
         } else{
             g().userArray = array;
-//            NSLog(@"**********%@",array);
-            [self loadViewsWithWeekChanged:self.weekNum];
+            [MBProgressHUD hideAllHUDsForView:self.mainCollectionView.window animated:YES];
+            [self loadViews];
         }
     }];
 }
-
-
 
 #pragma mark - BmobEvent Delegate
 
@@ -244,11 +243,6 @@ static NSString * const ID = @"cell";
     return row;
 }
 
-- (long)colFromTag:(long)tag {
-    long col = tag % 8;
-    return col;
-}
-
 #pragma mark - collectionView代理方法
 
 //每个section的item个数
@@ -277,8 +271,6 @@ static NSString * const ID = @"cell";
     }else {
         cell.commonLabel.text = @"";
         
-        NSLog(@">>>>>>>>>%zd",self.userArray.count);
-        
         //禁用已经预定的日期和时间段对应的按钮,并且设置标题内容
         for (int j = 0; j < self.userArray.count; j ++) {
             NSDictionary *dict = self.userArray[j];
@@ -304,7 +296,6 @@ static NSString * const ID = @"cell";
                 currentTag = [self tagFromRow:row andCol:7];
             }
             
-//            NSLog(@"currentTag%zd",currentTag);
             NSLog(@"dateArray%@",self.dateArray);
             
             //用户名和原因
@@ -316,16 +307,9 @@ static NSString * const ID = @"cell";
 
     }
     
-    cell.backgroundColor = [UIColor colorWithRed:220/255.f green:220/255.f blue:220/255.f alpha:1];
+    cell.backgroundColor = self.currentColor;
     
     return cell;
-}
-
-//设置每个item的尺寸
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    long width = (HKWidth - 7)/8;
-    return CGSizeMake(width, width);
 }
 
 //点击item方法
@@ -367,14 +351,18 @@ static NSString * const ID = @"cell";
         UITextField *textField = [alertView textFieldAtIndex:0];
         if ([textField.text isEqualToString:@""]) {
             [MBProgressHUD showError:@"原因不得为空" toView:self.view];
+            [self.mainCollectionView reloadData];
             return;
         }else if (textField.text.length > 4) {
             [MBProgressHUD showError:@"原因过长" toView:self.view];
+            [self.mainCollectionView reloadData];
             return;
         }
         //保存到数据库
         [self saveToBmobWithName:self.user period:self.peroidStr date:self.dateStr reason:textField.text andTag:self.tag];
         [MBProgressHUD showSuccess:@"预订成功" toView:self.view];
+    }else {
+        [self.mainCollectionView reloadData];
     }
 }
 

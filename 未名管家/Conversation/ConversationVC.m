@@ -178,6 +178,8 @@
         totalUnreadCount += [conversation unreadMessagesCount];
     }
     
+    
+    if (totalUnreadCount == 0) return;
     self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd",totalUnreadCount];
     
 }

@@ -8,6 +8,7 @@
 
 #import "SettingsVC.h"
 #import <EaseMobSDKFull/EaseMob.h>
+#import <BmobSDK/BmobUser.h>
 
 @interface SettingsVC () <EMChatManagerDelegate>
 
@@ -17,8 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *loginUsername = [[EaseMob sharedInstance].chatManager loginInfo][@"username"];
-    self.navigationItem.title = loginUsername;
+//    NSString *loginUsername = [[EaseMob sharedInstance].chatManager loginInfo][@"username"];
+    
+    BmobUser *bUser = [BmobUser getCurrentUser];
+    self.navigationItem.title = bUser.username;
+    
     //设置代理
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
