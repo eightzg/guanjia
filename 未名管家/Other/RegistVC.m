@@ -62,10 +62,22 @@
     else if (![self.labPwdField.text isEqualToString:@"renrendouaiycl"]) {
         [MBProgressHUD showError:@"实验室密码不正确！" toView:self.view];
         return;
+    }else if ([self hasChinese:self.userFiled.text]) {
+        [MBProgressHUD showError:@"用户名只能含有英文和数字" toView:self.view];
+        return;
     }else {
         [self registToBmob];
         [self registToEase];
     }
+}
+
+- (BOOL)hasChinese:(NSString *)str {
+    for(int i=0; i< [str length];i++){
+        int a = [str characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff)
+            return YES;
+    }
+    return NO;
 }
 
 /**注册用户到bmob平台*/
@@ -76,7 +88,7 @@
     [bUser signUpInBackgroundWithBlock:^(BOOL isSuccessful, NSError *error) {
         if (isSuccessful){
             NSLog(@"Bmob>>>>>>注册成功");
-            [MBProgressHUD showSuccess:@"注册成功" toView:self.view];
+            [MBProgressHUD showSuccess:@"注册成功" toView:self.view.window];
             //通知代理将用户名和密码填充到文本框
             [self.delegate registUser:self.userFiled.text password:self.pwdField.text];
 

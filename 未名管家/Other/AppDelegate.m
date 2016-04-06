@@ -12,6 +12,7 @@
 #import "ComObj.h"
 #import "GuideVC.h"
 #import "BaseTabBarController.h"
+#import "MBProgressHUD+MJ.h"
 
 #import <BmobSDK/Bmob.h>
 #import <BmobSDK/BmobUser.h>
@@ -75,6 +76,7 @@
                     // 设置自动登录
                     [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
                     NSLog(@"Ease>>>>>>自动登录成功");
+                    [MBProgressHUD showSuccess:@"登录成功!" toView:self.window];
                 }
             } onQueue:nil];
         }else {

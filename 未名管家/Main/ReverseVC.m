@@ -97,7 +97,6 @@ static NSString * const ID = @"cell";
 }
 //初始化视图
 - (void)loadViews{
-    
     //初始化日期数组
     self.dateArray = [NSMutableArray array];
     self.userArray = [NSMutableArray array];
@@ -105,6 +104,7 @@ static NSString * const ID = @"cell";
         [self.userArray addObject:dict];
     }
     [self.mainCollectionView reloadData];
+    
 }
 
 #pragma mark - actions
@@ -195,7 +195,7 @@ static NSString * const ID = @"cell";
 
 //从数据库查询
 - (void)getDataFromBmob {
-    [MBProgressHUD showMessage:@"加载中..." toView:self.mainCollectionView];
+    
     self.currentColor = [UIColor randomColor];
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"Time"];
     //查找GameScore表的数据
@@ -204,7 +204,6 @@ static NSString * const ID = @"cell";
             NSLog(@"error is:%@",error);
         } else{
             g().userArray = array;
-            [MBProgressHUD hideAllHUDsForView:self.mainCollectionView.window animated:YES];
             [self loadViews];
         }
     }];
@@ -296,8 +295,6 @@ static NSString * const ID = @"cell";
                 currentTag = [self tagFromRow:row andCol:7];
             }
             
-            NSLog(@"dateArray%@",self.dateArray);
-            
             //用户名和原因
             NSString *content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];
             if (indexPath.item == currentTag) {
@@ -308,7 +305,6 @@ static NSString * const ID = @"cell";
     }
     
     cell.backgroundColor = self.currentColor;
-    
     return cell;
 }
 
@@ -337,9 +333,6 @@ static NSString * const ID = @"cell";
     self.dateStr = self.dateArray[col-1];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请输入要占用实验室的理由" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-
-    
-    NSLog(@">>>>>>%zd>>>>%@>>>>>%@",self.tag, self.peroidStr, self.dateStr);
     [alert show];
     
 }
@@ -353,7 +346,7 @@ static NSString * const ID = @"cell";
             [MBProgressHUD showError:@"原因不得为空" toView:self.view];
             [self.mainCollectionView reloadData];
             return;
-        }else if (textField.text.length > 4) {
+        }else if (textField.text.length > 6) {
             [MBProgressHUD showError:@"原因过长" toView:self.view];
             [self.mainCollectionView reloadData];
             return;

@@ -66,6 +66,7 @@
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userField.text password:self.pwdField.text completion:^(NSDictionary *loginInfo, EMError *error) {
         if (!error && loginInfo) {
             NSLog(@"Ease>>>>>>>登陆成功");
+            [MBProgressHUD showSuccess:@"登陆成功!" toView:self.view.window];
         }
     } onQueue:nil];
 }

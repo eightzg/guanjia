@@ -43,9 +43,9 @@
         NSLog(@"添加好友失败 %@",error);
         
     }else{
-        NSLog(@"添加好友成功");
-//        [MBProgressHUD showSuccess:@"添加好友成功" toView:self.view.window];
-//        [self.navigationController popViewControllerAnimated:YES];
+        NSLog(@"请求已发送");
+        [MBProgressHUD showSuccess:@"请求已发送" toView:self.view.window];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
