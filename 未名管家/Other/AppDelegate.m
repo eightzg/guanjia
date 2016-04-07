@@ -58,14 +58,26 @@
     [Bmob registerWithAppKey:@"cf350ffb99e19618402682922e6b4c3e"];
     //获取当前用户
     BmobUser *bUser = [BmobUser getCurrentUser];
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+    
+    // 2.设置根控制器
+    NSString *key = @"CFBundleVersion";
+    // 上一次的使用版本（存储在沙盒中的版本号）
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    // 当前软件的版本号（从Info.plist中获得）
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+    
+
+    
+    if (![currentVersion isEqualToString:lastVersion]) {
+        // 将当前的版本号存进沙盒
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         self.window.backgroundColor = [UIColor whiteColor];
         GuideVC *guide = [[GuideVC alloc] init];
         self.window.rootViewController = guide;
         [self.window makeKeyAndVisible];
-    }else if (bUser) {//如果用户登陆过
+    }else if (bUser && [currentVersion isEqualToString:lastVersion]) {//如果用户登陆过
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         NSString *pwd = [userDefault objectForKey:@"password"];
         //自动登陆到Ease

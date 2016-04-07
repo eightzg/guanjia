@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self showIntroWithCrossDissolve];
+    [self showBasicIntroWithBg];
 }
 
 - (void)showIntroWithCrossDissolve {
@@ -49,19 +49,16 @@
 
 - (void)showBasicIntroWithBg {
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = @"Hello world";
-    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    page1.titleImage = [UIImage imageNamed:@"original"];
+    page1.title = @"一个大写的“抱歉”";
+    page1.desc = @"对不起让大家久等了！之前主要功能的各种八阿哥，每次更新都要删除数据，给大家带来的不便深深抱歉。";
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = @"This is page 2";
-    page2.desc = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.";
-    page2.titleImage = [UIImage imageNamed:@"supportcat"];
+    page2.title = @"更新日志";
+    page2.desc = @"1,解决右下角位置不能占用的八阿哥，刷新数据不实时的八阿哥。2,加入即时通讯功能（尚未完善）";
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title = @"This is page 3";
-    page3.desc = @"Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.";
-    page3.titleImage = [UIImage imageNamed:@"femalecodertocat"];
+    page3.title = @"💔💔%>_<%💔💔";
+    page3.desc = @"本来想一次性做好所有的功能的，怎奈最近任务颇多，所以后续的功能敬请期待...";
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2,page3]];
     intro.bgImage = [UIImage imageNamed:@"introBg"];

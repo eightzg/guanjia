@@ -22,7 +22,7 @@
         //设置原因标签在父控件的位置
         self.commonLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
         self.commonLabel.textAlignment = NSTextAlignmentCenter;
-        self.commonLabel.font = [UIFont systemFontOfSize:13];
+        self.commonLabel.font = [UIFont systemFontOfSize:10];
         self.commonLabel.numberOfLines = 2;
         [self.contentView addSubview:self.commonLabel];
     }

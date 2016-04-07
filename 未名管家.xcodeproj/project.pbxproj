@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1868CAC31CB518E10069B787 /* UserDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868CAC21CB518E10069B787 /* UserDetailVC.m */; };
 		186979561CB0C25D00191D3D /* MyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186979551CB0C25D00191D3D /* MyCollectionViewCell.m */; };
 		1871CD611C979539003923C2 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871CD601C979539003923C2 /* Chat.storyboard */; };
 		1871CD801C979D4A003923C2 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871CD6A1C979D4A003923C2 /* MASCompositeConstraint.m */; };
@@ -107,6 +108,8 @@
 
 /* Begin PBXFileReference section */
 		0C25150D31863E9B13DB46F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		1868CAC11CB518E10069B787 /* UserDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailVC.h; sourceTree = "<group>"; };
+		1868CAC21CB518E10069B787 /* UserDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailVC.m; sourceTree = "<group>"; };
 		186979541CB0C25D00191D3D /* MyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCell.h; sourceTree = "<group>"; };
 		186979551CB0C25D00191D3D /* MyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCell.m; sourceTree = "<group>"; };
 		1871CD601C979539003923C2 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -468,6 +471,8 @@
 				187B36B91C8474800090D966 /* Settings.storyboard */,
 				187B36BB1C8475FA0090D966 /* SettingsVC.h */,
 				187B36BC1C8475FA0090D966 /* SettingsVC.m */,
+				1868CAC11CB518E10069B787 /* UserDetailVC.h */,
+				1868CAC21CB518E10069B787 /* UserDetailVC.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -904,6 +909,7 @@
 				1871CD851C979D4A003923C2 /* MASViewConstraint.m in Sources */,
 				186979561CB0C25D00191D3D /* MyCollectionViewCell.m in Sources */,
 				1871CDB01C97C15E003923C2 /* EMCDDeviceManagerBase.m in Sources */,
+				1868CAC31CB518E10069B787 /* UserDetailVC.m in Sources */,
 				1871CDE21C97C1AA003923C2 /* UIView+WebCacheOperation.m in Sources */,
 				187B36CB1C847D810090D966 /* HistoryCell.m in Sources */,
 				1871CD861C979D4A003923C2 /* NSArray+MASAdditions.m in Sources */,

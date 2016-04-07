@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"会话";
     //设置代理
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     //获取历史会话记录
