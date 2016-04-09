@@ -65,9 +65,7 @@
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     // 当前软件的版本号（从Info.plist中获得）
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
-    
 
-    
     if (![currentVersion isEqualToString:lastVersion]) {
         // 将当前的版本号存进沙盒
         [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:key];

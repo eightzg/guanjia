@@ -46,20 +46,19 @@
         return;
     }
     //登录到Bmob
+    
     [BmobUser loginInbackgroundWithAccount:self.userField.text andPassword:self.pwdField.text block:^(BmobUser *user, NSError *error) {
         if (user) {
             NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
             [userDefault setObject:self.pwdField.text forKey:@"password"];
             [userDefault setObject:self.userField.text forKey:@"userName"];
             [userDefault setBool:self.rmbPwdSwitch.isOn forKey:@"switchStatus"];
-            //将window的主窗口设置为tabBarController
-            BaseTabBarController *tb = [[BaseTabBarController alloc] init];
-            self.view.window.rootViewController = tb;
         } else {
             if (error.code == 101) {
-                [MBProgressHUD showError:@"用户名或密码不正确" toView:self.view];
+                [MBProgressHUD showError:@"用户名或密码不正确" toView:self.view.window];
             }
         }
+
     }];
     
     //登录到Ease
@@ -69,6 +68,10 @@
             [MBProgressHUD showSuccess:@"登陆成功!" toView:self.view.window];
         }
     } onQueue:nil];
+    
+    //将window的主窗口设置为tabBarController
+    BaseTabBarController *tb = [[BaseTabBarController alloc] init];
+    self.view.window.rootViewController = tb;
 }
 //忘记密码
 - (IBAction)lostPwdBtnClicked:(id)sender {
@@ -90,6 +93,10 @@
         RegistVC *registVC = segue.destinationViewController;
         registVC.delegate = self;
     }
+}
+
+- (void)dealloc {
+    NSLog(@"LoginVC--------dealloc");
 }
 
 @end

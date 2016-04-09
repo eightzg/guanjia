@@ -50,5 +50,8 @@
     
 }
 
+- (void)dealloc {
+    NSLog(@"BaseTabBarController--------dealloc");
+}
 
 @end
