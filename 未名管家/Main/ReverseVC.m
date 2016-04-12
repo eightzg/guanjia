@@ -23,7 +23,7 @@
 
 #import <EaseMobSDKFull/EaseMob.h>
 
-@interface ReverseVC () <UIAlertViewDelegate, UIActionSheetDelegate, BmobEventDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface ReverseVC () <UIAlertViewDelegate, UIActionSheetDelegate, BmobEventDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, EMChatManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 //时间段数组
 @property (nonatomic, strong) NSArray *timeArray;
@@ -43,12 +43,12 @@
 @property (nonatomic, strong) NSMutableArray *userArray;
 //用来存放当前一周的日期和星期
 @property (nonatomic, strong) NSMutableArray *dateArray;
-
-/**
- *  collectionView
- */
+/** 预定界面的collectionView */
 @property (nonatomic, strong) UICollectionView *mainCollectionView;
+/** 当前颜色 */
 @property (nonatomic, strong) UIColor *currentColor;
+/** 历史会话记录,用来在第二个tab显示badge */
+@property (nonatomic, strong) NSArray *conversations;
 
 @end
 
@@ -63,6 +63,10 @@ static NSString * const ID = @"cell";
     [self getDataFromBmob];
     //监听数据改变
     [self listen];
+    //设置会话监听的代理
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    //显示第二个tab和application的badge
+    [self showBadgeValue];
     self.title = @"预定";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(logoutClicked)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"预定历史" style:UIBarButtonItemStylePlain target:self action:@selector(historyClicked)];
@@ -95,6 +99,29 @@ static NSString * const ID = @"cell";
     
     [self.view addSubview:self.mainCollectionView];
 }
+
+- (void)showBadgeValue{
+    //1.从内存获取历史会话记录
+    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+    //2.如果内存里没有会话记录，从数据库Conversation表
+    if (conversations.count == 0) {
+        conversations =  [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+    }
+    self.conversations = conversations;
+    //显示总的未读数
+    NSInteger totalUnreadCount = 0;
+    for (EMConversation *conversation in self.conversations) {
+        totalUnreadCount += [conversation unreadMessagesCount];
+    }
+    //显示第二个tab和application的badge
+    self.tabBarController.tabBar.items[1].badgeValue = [NSString stringWithFormat:@"%zd",totalUnreadCount];
+    UIApplication *application = [UIApplication sharedApplication];
+    application.applicationIconBadgeNumber = totalUnreadCount;
+    if (totalUnreadCount == 0) {
+        self.tabBarController.tabBar.items[1].badgeValue = nil;
+    }
+}
+
 //初始化视图
 - (void)loadViews{
     //初始化日期数组
@@ -357,6 +384,24 @@ static NSString * const ID = @"cell";
     }else {
         [self.mainCollectionView reloadData];
     }
+}
+
+#pragma mark - 监听会话监听回调
+#pragma mark 历史会话列表更新
+-(void)didUpdateConversationList:(NSArray *)conversationList{
+    
+    //给数据源重新赋值
+    self.conversations = conversationList;
+    //显示总的未读数
+    [self showBadgeValue];
+    
+}
+
+#pragma mark 未读消息数改变
+- (void)didUnreadMessagesCountChanged{
+    //显示总的未读数
+    [self showBadgeValue];
+    
 }
 
 

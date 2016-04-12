@@ -29,7 +29,7 @@
     
 }
 
--(void)loadConversations{
+- (void)loadConversations{
     //获取历史会话记录
     //1.从内存获取历史会话记录
     NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
@@ -78,10 +78,7 @@
 
 
 #pragma mark - Table view data source
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return self.conversations.count;
 }
 
@@ -115,7 +112,6 @@
     
     return cell;
     
-    
 }
 
 
@@ -136,11 +132,7 @@
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"xxxx" message:message delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
     [alert show];
     
-    
 }
-
-
-
 
 - (void)dealloc
 {
@@ -180,6 +172,8 @@
     }
     
     self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd",totalUnreadCount];
+    UIApplication *application = [UIApplication sharedApplication];
+    application.applicationIconBadgeNumber = totalUnreadCount;
     if (totalUnreadCount == 0) {
         self.navigationController.tabBarItem.badgeValue = nil;
     }
