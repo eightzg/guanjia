@@ -394,7 +394,7 @@ static NSString * const ID = @"cell";
     self.conversations = conversationList;
     //显示总的未读数
     [self showBadgeValue];
-    
+    [self initLocalNotification];
 }
 
 #pragma mark 未读消息数改变
@@ -402,6 +402,40 @@ static NSString * const ID = @"cell";
     //显示总的未读数
     [self showBadgeValue];
     
+}
+
+//- (void)didReceiveMessage:(EMMessage *)message {
+//    [self initLocalNotification];
+//}
+
+//长连接的时候设置本地通知
+- (void)initLocalNotification {
+    // 1.创建本地通知
+    UILocalNotification *localNote = [[UILocalNotification alloc] init];
+//    
+//    // 2.设置本地通知的内容
+//    // 2.1.设置通知发出的时间
+//    localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:3.0];
+//    // 2.2.设置通知的内容
+    localNote.alertBody = @"吃饭了吗?";
+//    // 2.3.设置滑块的文字
+    localNote.alertAction = @"快点";
+//    // 2.4.决定alertAction是否生效
+//    localNote.hasAction = NO;
+//    // 2.5.设置点击通知的启动图片
+//    localNote.alertLaunchImage = @"3213432dasf";
+//    // 2.6.设置alertTitle
+//    localNote.alertTitle = @"3333333333";
+    // 2.7.设置有通知时的音效
+    localNote.soundName = UILocalNotificationDefaultSoundName;
+    // 2.8.设置应用程序图标右上角的数字
+    localNote.applicationIconBadgeNumber = 999;
+    
+    // 2.9.设置额外信息
+    localNote.userInfo = @{@"type" : @1};
+    
+    // 3.调用通知
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
 }
 
 

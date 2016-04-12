@@ -70,7 +70,7 @@
 -(void)didAutoReconnectFinishedWithError:(NSError *)error{
     if (!error) {
         NSLog(@"自动重连接成功...");
-        self.title = @"Conversation";
+        self.title = @"会话";
     }else{
         NSLog(@"自动重连接失败... %@",error);
     }

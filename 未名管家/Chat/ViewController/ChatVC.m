@@ -526,7 +526,6 @@
     }else {
         [self startTimer];
     }
-    [self.textView resignFirstResponder];
 }
 
 @end

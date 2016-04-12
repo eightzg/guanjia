@@ -32,7 +32,7 @@
     //注册远程通知
     if ([UIDevice currentDevice].systemVersion.doubleValue <= 8.0) {
         // 不是iOS8
-        UIRemoteNotificationType type = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
+        UIRemoteNotificationType type = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeNewsstandContentAvailability;
         // 当用户第一次启动程序时就获取deviceToke
         // 该方法在iOS8以及过期了
         // 只要调用该方法, 系统就会自动发送UDID和当前程序的Bunle ID到苹果的APNs服务器
@@ -50,7 +50,7 @@
     }
     
     //初始化环信
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"jilindaxue#wmmanager" apnsCertName:@"WMmanagerCer" otherConfig:@{kSDKConfigEnableConsoleLogger:@(NO)}];
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"jilindaxue#wmmanager" apnsCertName:@"guanjia_development" otherConfig:@{kSDKConfigEnableConsoleLogger:@(NO)}];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
@@ -125,6 +125,7 @@
 //连接APNs失败时候调用
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     NSLog(@"连接APNs失败");
+    [[EaseMob sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 //成功连接到APNs时候调用
@@ -132,6 +133,8 @@
     //将deviceToken存起来
     NSLog(@"%@",deviceToken);
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"token"];
+    // 将得到的deviceToken传给环信服务器
+    [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     
 }
 
