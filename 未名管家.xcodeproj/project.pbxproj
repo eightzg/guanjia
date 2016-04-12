@@ -1019,7 +1019,7 @@
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eight.HK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eight.guanjia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1140,7 +1140,7 @@
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eight.HK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eight.guanjia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1164,7 +1164,7 @@
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/未名管家/Libs/VoiceConvert/opencore-amrwb",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.eight.HK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eight.guanjia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
