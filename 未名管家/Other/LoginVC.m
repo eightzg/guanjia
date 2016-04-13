@@ -53,6 +53,7 @@
             [userDefault setObject:self.pwdField.text forKey:@"password"];
             [userDefault setObject:self.userField.text forKey:@"userName"];
             [userDefault setBool:self.rmbPwdSwitch.isOn forKey:@"switchStatus"];
+            [MBProgressHUD showSuccess:@"登陆成功!" toView:self.view.window];
         } else {
             if (error.code == 101) {
                 [MBProgressHUD showError:@"用户名或密码不正确" toView:self.view.window];
@@ -65,7 +66,7 @@
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.userField.text password:self.pwdField.text completion:^(NSDictionary *loginInfo, EMError *error) {
         if (!error && loginInfo) {
             NSLog(@"Ease>>>>>>>登陆成功");
-            [MBProgressHUD showSuccess:@"登陆成功!" toView:self.view.window];
+            
         }
     } onQueue:nil];
     

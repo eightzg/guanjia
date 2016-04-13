@@ -86,7 +86,7 @@
                     // 设置自动登录
                     [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
                     NSLog(@"Ease>>>>>>自动登录成功");
-                    [MBProgressHUD showSuccess:@"登录成功!" toView:self.window];
+                    
                 }
             } onQueue:nil];
         }else {
@@ -96,6 +96,7 @@
         [BmobUser loginInbackgroundWithAccount:bUser.username andPassword:pwd block:^(BmobUser *user, NSError *error) {
             if (user) {
                 NSLog(@"%@",user);
+                [MBProgressHUD showSuccess:@"登录成功!" toView:self.window];
             } else {
                 NSLog(@"%@",error);
             }
