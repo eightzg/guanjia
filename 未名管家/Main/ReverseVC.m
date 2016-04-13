@@ -22,6 +22,7 @@
 #import <BmobQuery.h>
 
 #import <EaseMobSDKFull/EaseMob.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface ReverseVC () <UIAlertViewDelegate, UIActionSheetDelegate, BmobEventDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, EMChatManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -366,11 +367,10 @@ static NSString * const ID = @"cell";
 #pragma mark - 监听会话监听回调
 // 历史会话列表更新
 -(void)didUpdateConversationList:(NSArray *)conversationList{
-    
     //给数据源重新赋值
     self.conversations = conversationList;
     //显示总的未读数
-    [self showBadgeValue];
+//    [self showBadgeValue];
 }
 
 // 未读消息数改变
@@ -414,7 +414,7 @@ static NSString * const ID = @"cell";
 }
 
 - (void)didReceiveMessage:(EMMessage *)message {
-//    AVAudioPlayer *player = [[AVAudioPlayeralloc] initWithContentsOfURL:[NSURLfileURLWithPath:[[NSBundlemainBundle] pathForResource:@"星月神话" ofType:@"mp3"]] error:nil];
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 @end

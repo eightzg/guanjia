@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[EaseMob sharedInstance].chatManager setIsAutoFetchBuddyList:YES];
     
     // 添加聊天管理器的代理
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
