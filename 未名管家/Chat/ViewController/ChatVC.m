@@ -170,6 +170,9 @@
     //显示内容
     cell.message = message;
     
+    [self initAnmiate:cell.messageLabel.text];
+    NSLog(@"%@",cell.messageLabel.text);
+    
     return cell;
     
     
@@ -240,7 +243,7 @@
     EMTextMessageBody *textBody = [[EMTextMessageBody alloc] initWithChatObject:chatText];
     
     [self sendMessage:textBody];
-    [self initAnmiate];
+    [self initAnmiate:self.textView.text];
     
 }
 
@@ -444,7 +447,7 @@
     }
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(randomAnimateWithDelay) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    [self performSelector:@selector(fireTimer) withObject:nil afterDelay:5];
+    [self performSelector:@selector(fireTimer) withObject:nil afterDelay:3];
     
 }
 
@@ -491,37 +494,37 @@
 }
 
 //按钮点击
-- (void)initAnmiate {
+- (void)initAnmiate:(NSString *)string {
     //再次点击按钮取消动画，动画文字对应的数字重置
     [self.timer invalidate];
     self.number = 0;
     
-    NSString *text = self.textView.text;
-    if ([text isEqualToString:@"羞羞哒\n"]) {
+    NSString *text = string;
+    if ([text containsString:@"羞"]) {
         self.number = 6;
     }
-    if ([text isEqualToString:@"色眯眯\n"]) {
+    if ([text containsString:@"色"]) {
         self.number = 3;
     }
-    if ([text isEqualToString:@"么么哒\n"]) {
+    if ([text containsString:@"亲爱的"]) {
         self.number = 75;
     }
-    if ([text isEqualToString:@"开心\n"]) {
+    if ([text containsString:@"开心"]) {
         self.number = 13;
     }
-    if ([text isEqualToString:@"偷笑\n"]) {
+    if ([text containsString:@"哈哈"]) {
         self.number = 19;
     }
-    if ([text isEqualToString:@"傻笑\n"]) {
+    if ([text containsString:@"傻笑"]) {
         self.number = 27;
     }
-    if ([text isEqualToString:@"好衰\n"]) {
+    if ([text containsString:@"衰"]) {
         self.number = 33;
     }
-    if ([text isEqualToString:@"好棒\n"]) {
+    if ([text containsString:@"棒"]) {
         self.number = 65;
     }
-    if ([self.textView.text isEqualToString:@""]) {
+    if ([text isEqualToString:@""]) {
         return;
     }else {
         [self startTimer];
