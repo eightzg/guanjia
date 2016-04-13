@@ -170,9 +170,6 @@
     //显示内容
     cell.message = message;
     
-    [self initAnmiate:cell.messageLabel.text];
-    NSLog(@"%@",cell.messageLabel.text);
-    
     return cell;
     
     
@@ -243,6 +240,7 @@
     EMTextMessageBody *textBody = [[EMTextMessageBody alloc] initWithChatObject:chatText];
     
     [self sendMessage:textBody];
+    
     [self initAnmiate:self.textView.text];
     
 }
@@ -309,8 +307,14 @@
 #pragma mark 接收好友回复消息
 -(void)didReceiveMessage:(EMMessage *)message{
 #warning from 一定等于当前聊天用户才可以刷新数据
-    //test1 - test7
-    //test1 - test8
+    
+    NSLog(@">>>>>>>>>%@",message);
+    id body = message.messageBodies[0];
+    if ([body isKindOfClass:[EMTextMessageBody class]]) {//文本消息
+        EMTextMessageBody *textBody = body;
+        [self initAnmiate:textBody.text];
+    }
+    
     if ([message.from isEqualToString:self.buddy.username]) {
         //1.把接收的消息添加到数据源
         //        [self.dataSources addObject:message];
@@ -508,7 +512,7 @@
     if ([text containsString:@"色"]) {
         self.number = 3;
     }
-    if ([text containsString:@"亲爱的"]) {
+    if ([text containsString:@"么么哒"]) {
         self.number = 75;
     }
     if ([text containsString:@"开心"]) {

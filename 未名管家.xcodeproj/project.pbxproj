@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1867A0771CBE1B91008397D2 /* buyao.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1867A0761CBE1B91008397D2 /* buyao.wav */; };
+		1867A0791CBE253B008397D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1867A0781CBE253B008397D2 /* LaunchScreen.storyboard */; };
+		1867A07B1CBE278B008397D2 /* launcher.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1867A07A1CBE278B008397D2 /* launcher.jpeg */; };
 		1868CAC31CB518E10069B787 /* UserDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868CAC21CB518E10069B787 /* UserDetailVC.m */; };
 		186979561CB0C25D00191D3D /* MyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186979551CB0C25D00191D3D /* MyCollectionViewCell.m */; };
 		1871CD611C979539003923C2 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871CD601C979539003923C2 /* Chat.storyboard */; };
@@ -81,7 +84,6 @@
 		187B37071C847F190090D966 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B37061C847F190090D966 /* main.m */; };
 		1894010A1BFC02A300F7329F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189401081BFC02A300F7329F /* Main.storyboard */; };
 		1894010C1BFC02A300F7329F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1894010B1BFC02A300F7329F /* Images.xcassets */; };
-		1894010F1BFC02A300F7329F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1894010D1BFC02A300F7329F /* LaunchScreen.xib */; };
 		1894011B1BFC02A300F7329F /* ____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894011A1BFC02A300F7329F /* ____Tests.m */; };
 		18B431401C905B0900255293 /* AddFriendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B4313F1C905B0900255293 /* AddFriendVC.m */; };
 		18B431E91C9160C600255293 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B431E61C9160C600255293 /* Conversation.storyboard */; };
@@ -108,6 +110,9 @@
 
 /* Begin PBXFileReference section */
 		0C25150D31863E9B13DB46F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		1867A0761CBE1B91008397D2 /* buyao.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buyao.wav; sourceTree = "<group>"; };
+		1867A0781CBE253B008397D2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1867A07A1CBE278B008397D2 /* launcher.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launcher.jpeg; sourceTree = "<group>"; };
 		1868CAC11CB518E10069B787 /* UserDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailVC.h; sourceTree = "<group>"; };
 		1868CAC21CB518E10069B787 /* UserDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailVC.m; sourceTree = "<group>"; };
 		186979541CB0C25D00191D3D /* MyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCell.h; sourceTree = "<group>"; };
@@ -255,12 +260,10 @@
 		189400FF1BFC02A300F7329F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		189401091BFC02A300F7329F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1894010B1BFC02A300F7329F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		1894010E1BFC02A300F7329F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		189401141BFC02A300F7329F /* 未名管家Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "未名管家Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189401191BFC02A300F7329F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1894011A1BFC02A300F7329F /* ____Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "____Tests.m"; sourceTree = "<group>"; };
 		18A193F31BFF5CB900BE8E6E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		18A193F41BFF5CB900BE8E6E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		18B4313E1C905B0900255293 /* AddFriendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendVC.h; sourceTree = "<group>"; };
 		18B4313F1C905B0900255293 /* AddFriendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendVC.m; sourceTree = "<group>"; };
 		18B431E61C9160C600255293 /* Conversation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
@@ -596,8 +599,8 @@
 				18F0A3BC1C89C35500D5C82D /* Contacts */,
 				187B36B81C8474590090D966 /* Settings */,
 				189401081BFC02A300F7329F /* Main.storyboard */,
+				1867A0781CBE253B008397D2 /* LaunchScreen.storyboard */,
 				1894010B1BFC02A300F7329F /* Images.xcassets */,
-				1894010D1BFC02A300F7329F /* LaunchScreen.xib */,
 				189400FE1BFC02A300F7329F /* Supporting Files */,
 			);
 			path = "未名管家";
@@ -606,6 +609,8 @@
 		189400FE1BFC02A300F7329F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1867A07A1CBE278B008397D2 /* launcher.jpeg */,
+				1867A0761CBE1B91008397D2 /* buyao.wav */,
 				1871CDFA1C97C2D0003923C2 /* PrefixHeader.pch */,
 				18B432041C917BD700255293 /* messages.plist */,
 				187B37061C847F190090D966 /* main.m */,
@@ -801,12 +806,14 @@
 				18B432051C917BD700255293 /* messages.plist in Resources */,
 				187B36CC1C847D810090D966 /* HistoryCell.xib in Resources */,
 				187B36BA1C8474800090D966 /* Settings.storyboard in Resources */,
+				1867A0791CBE253B008397D2 /* LaunchScreen.storyboard in Resources */,
 				1871CD611C979539003923C2 /* Chat.storyboard in Resources */,
-				1894010F1BFC02A300F7329F /* LaunchScreen.xib in Resources */,
 				187B37031C847EF50090D966 /* original@2x.png in Resources */,
 				1894010C1BFC02A300F7329F /* Images.xcassets in Resources */,
+				1867A0771CBE1B91008397D2 /* buyao.wav in Resources */,
 				18F0A3BE1C89C3EE00D5C82D /* Contacts.storyboard in Resources */,
 				187B37001C847EF50090D966 /* MBProgressHUD.bundle in Resources */,
+				1867A07B1CBE278B008397D2 /* launcher.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,15 +957,6 @@
 				18A193F31BFF5CB900BE8E6E /* zh-Hans */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		1894010D1BFC02A300F7329F /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1894010E1BFC02A300F7329F /* Base */,
-				18A193F41BFF5CB900BE8E6E /* zh-Hans */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

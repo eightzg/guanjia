@@ -65,7 +65,6 @@ static NSString * const ID = @"cell";
     [self listen];
     //设置会话监听的代理
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
-    //显示第二个tab和application的badge
     [self showBadgeValue];
     self.title = @"预定";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(logoutClicked)];
@@ -98,28 +97,6 @@ static NSString * const ID = @"cell";
     self.mainCollectionView.dataSource = self;
     
     [self.view addSubview:self.mainCollectionView];
-}
-
-- (void)showBadgeValue{
-    //1.从内存获取历史会话记录
-    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-    //2.如果内存里没有会话记录，从数据库Conversation表
-    if (conversations.count == 0) {
-        conversations =  [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
-    }
-    self.conversations = conversations;
-    //显示总的未读数
-    NSInteger totalUnreadCount = 0;
-    for (EMConversation *conversation in self.conversations) {
-        totalUnreadCount += [conversation unreadMessagesCount];
-    }
-    //显示第二个tab和application的badge
-    self.tabBarController.tabBar.items[1].badgeValue = [NSString stringWithFormat:@"%zd",totalUnreadCount];
-    UIApplication *application = [UIApplication sharedApplication];
-    application.applicationIconBadgeNumber = totalUnreadCount;
-    if (totalUnreadCount == 0) {
-        self.tabBarController.tabBar.items[1].badgeValue = nil;
-    }
 }
 
 //初始化视图
@@ -387,57 +364,57 @@ static NSString * const ID = @"cell";
 }
 
 #pragma mark - 监听会话监听回调
-#pragma mark 历史会话列表更新
+// 历史会话列表更新
 -(void)didUpdateConversationList:(NSArray *)conversationList{
     
     //给数据源重新赋值
     self.conversations = conversationList;
     //显示总的未读数
     [self showBadgeValue];
-    [self initLocalNotification];
 }
 
-#pragma mark 未读消息数改变
+// 未读消息数改变
 - (void)didUnreadMessagesCountChanged{
     //显示总的未读数
     [self showBadgeValue];
     
 }
 
-//- (void)didReceiveMessage:(EMMessage *)message {
-//    [self initLocalNotification];
-//}
-
-//长连接的时候设置本地通知
-- (void)initLocalNotification {
-    // 1.创建本地通知
+//显示第二个tab和application的badge
+- (void)showBadgeValue{
+    //1.从内存获取历史会话记录
+    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+    //2.如果内存里没有会话记录，从数据库Conversation表
+    if (conversations.count == 0) {
+        conversations =  [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+    }
+    self.conversations = conversations;
+    //显示总的未读数
+    NSInteger totalUnreadCount = 0;
+    for (EMConversation *conversation in self.conversations) {
+        totalUnreadCount += [conversation unreadMessagesCount];
+    }
+    //显示第二个tab和application的badge
+    self.tabBarController.tabBar.items[1].badgeValue = [NSString stringWithFormat:@"%zd",totalUnreadCount];
+    UIApplication *application = [UIApplication sharedApplication];
+    application.applicationIconBadgeNumber = totalUnreadCount;
+    if (totalUnreadCount == 0) {
+        self.tabBarController.tabBar.items[1].badgeValue = nil;
+    }
+    
+    // 创建本地通知
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
-//    
-//    // 2.设置本地通知的内容
-//    // 2.1.设置通知发出的时间
-//    localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:3.0];
-//    // 2.2.设置通知的内容
-    localNote.alertBody = @"吃饭了吗?";
-//    // 2.3.设置滑块的文字
-    localNote.alertAction = @"快点";
-//    // 2.4.决定alertAction是否生效
-//    localNote.hasAction = NO;
-//    // 2.5.设置点击通知的启动图片
-//    localNote.alertLaunchImage = @"3213432dasf";
-//    // 2.6.设置alertTitle
-//    localNote.alertTitle = @"3333333333";
-    // 2.7.设置有通知时的音效
+    localNote.alertBody = @"您有一条新的消息";
+    localNote.alertAction = @"查看消息";
     localNote.soundName = UILocalNotificationDefaultSoundName;
-    // 2.8.设置应用程序图标右上角的数字
-    localNote.applicationIconBadgeNumber = 999;
-    
-    // 2.9.设置额外信息
-    localNote.userInfo = @{@"type" : @1};
-    
-    // 3.调用通知
+    localNote.applicationIconBadgeNumber = totalUnreadCount;
+    //调用通知
     [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
+    
 }
 
-
+- (void)didReceiveMessage:(EMMessage *)message {
+//    AVAudioPlayer *player = [[AVAudioPlayeralloc] initWithContentsOfURL:[NSURLfileURLWithPath:[[NSBundlemainBundle] pathForResource:@"星月神话" ofType:@"mp3"]] error:nil];
+}
 
 @end

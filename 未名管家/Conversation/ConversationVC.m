@@ -92,7 +92,7 @@
     
     // 显示数据
     // 1.显示用户名
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ ==== 未读消息数:%ld",conversaion.chatter,[conversaion unreadMessagesCount]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ ==== 未读消息数:%zd",conversaion.chatter,[conversaion unreadMessagesCount]];
     
     // 2.显示最新的一条记录
     // 获取消息体

@@ -35,9 +35,7 @@
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
 }
 
-- (void)didReceiveMessage:(EMMessage *)message {
-    NSLog(@"接收到消息>>>>>>%@",message);
-}
+
 
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

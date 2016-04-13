@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iw1-th-FyR">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="laE-Tu-2gR">
+            <objects>
+                <viewController id="iw1-th-FyR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E6g-qm-CqD"/>
+                        <viewControllerLayoutGuide type="bottom" id="ncO-Wh-sfu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleAspectFill" id="gRF-Qz-BmA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launcher.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="KEn-eR-1a7">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KEn-eR-1a7" secondAttribute="trailing" id="Jhz-tj-o7T"/>
+                            <constraint firstItem="ncO-Wh-sfu" firstAttribute="top" secondItem="KEn-eR-1a7" secondAttribute="bottom" id="Sze-lM-m4y"/>
+                            <constraint firstItem="KEn-eR-1a7" firstAttribute="leading" secondItem="gRF-Qz-BmA" secondAttribute="leading" id="lsl-Fk-McC"/>
+                            <constraint firstItem="KEn-eR-1a7" firstAttribute="top" secondItem="E6g-qm-CqD" secondAttribute="bottom" id="yVJ-iX-8NH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="KEn-eR-1a7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Jhz-tj-o7T"/>
+                                <exclude reference="lsl-Fk-McC"/>
+                                <exclude reference="yVJ-iX-8NH"/>
+                                <exclude reference="Sze-lM-m4y"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="KEn-eR-1a7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Jhz-tj-o7T"/>
+                                <include reference="lsl-Fk-McC"/>
+                                <include reference="yVJ-iX-8NH"/>
+                                <include reference="Sze-lM-m4y"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGe-Wg-Etd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="346"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="launcher.jpeg" width="640" height="960"/>
+    </resources>
+</document>
