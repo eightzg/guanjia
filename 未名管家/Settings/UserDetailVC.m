@@ -21,9 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    self.iconView.image = [UIImage imageNamed:@"icon_image"];
+    self.iconView.image = [UIImage imageNamed:@"头像"];
     BmobUser *bUser = [BmobUser getCurrentUser];
     self.userName.text = bUser.username;
+    self.hidesBottomBarWhenPushed = YES;
+}
+
+#pragma mark - UITableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
