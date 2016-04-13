@@ -404,6 +404,8 @@
     //1.获取用户选中的图片
     UIImage *selectedImg =  info[UIImagePickerControllerOriginalImage];
     
+    
+    
     //2.发送图片
     [self sendImg:selectedImg];
     
