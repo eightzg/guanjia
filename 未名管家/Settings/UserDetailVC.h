@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UserDetailVC : UITableViewController
-
+/**
+ *  昵称
+ */
+@property (nonatomic, copy) NSString *nick;
 @end

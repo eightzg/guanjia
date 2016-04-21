@@ -141,7 +141,7 @@
             </objects>
             <point key="canvasLocation" x="313" y="356"/>
         </scene>
-        <!--User DetailVC-->
+        <!--信息设置-->
         <scene sceneID="mwQ-oc-3r4">
             <objects>
                 <tableViewController id="lWa-4M-5wg" customClass="UserDetailVC" sceneMemberID="viewController">
@@ -214,6 +214,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="dR6-hS-CVu" kind="push" id="t5s-Ce-0JO"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="vjr-LT-fja">
                                         <rect key="frame" x="0.0" y="224" width="600" height="60"/>
@@ -254,7 +257,7 @@
                             <outlet property="delegate" destination="lWa-4M-5wg" id="17X-jp-xIz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="SjR-Xo-G6f"/>
+                    <navigationItem key="navigationItem" title="信息设置" id="SjR-Xo-G6f"/>
                     <connections>
                         <outlet property="iconView" destination="eyE-EY-7Ej" id="PBI-Z4-dQm"/>
                         <outlet property="nickName" destination="TYY-7g-ym6" id="Xjc-I3-bLw"/>
@@ -263,7 +266,59 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B51-x2-rcB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="356"/>
+            <point key="canvasLocation" x="959" y="356"/>
+        </scene>
+        <!--修改昵称-->
+        <scene sceneID="Jax-PW-1Nw">
+            <objects>
+                <viewController id="dR6-hS-CVu" customClass="ChangeNickVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O27-Db-9u6"/>
+                        <viewControllerLayoutGuide type="bottom" id="aEX-V1-OIG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VLC-zZ-8vk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RW-98-MPY">
+                                <rect key="frame" x="225.5" y="102" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="YWk-K0-3pI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3n-6d-Q23">
+                                <rect key="frame" x="275" y="147" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Bii-tz-Uwg"/>
+                                    <constraint firstAttribute="width" constant="50" id="CkT-uG-hC3"/>
+                                </constraints>
+                                <state key="normal" title="修改">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeBtnClicked:" destination="dR6-hS-CVu" eventType="touchUpInside" id="SG0-c6-vzN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9RW-98-MPY" firstAttribute="centerX" secondItem="VLC-zZ-8vk" secondAttribute="centerX" id="coN-mp-t3A"/>
+                            <constraint firstItem="9RW-98-MPY" firstAttribute="top" secondItem="O27-Db-9u6" secondAttribute="bottom" constant="38" id="gVq-dX-tLS"/>
+                            <constraint firstItem="a3n-6d-Q23" firstAttribute="centerX" secondItem="VLC-zZ-8vk" secondAttribute="centerX" id="hfq-3C-NbX"/>
+                            <constraint firstItem="a3n-6d-Q23" firstAttribute="top" secondItem="9RW-98-MPY" secondAttribute="bottom" constant="15" id="ksU-SA-1V0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="修改昵称" id="2Aj-dm-CZV"/>
+                    <connections>
+                        <outlet property="textField" destination="9RW-98-MPY" id="atI-WW-Kin"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mRV-QO-UDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1632" y="349"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S8S-Ps-SyL">

@@ -85,6 +85,7 @@
 		1894010A1BFC02A300F7329F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 189401081BFC02A300F7329F /* Main.storyboard */; };
 		1894010C1BFC02A300F7329F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1894010B1BFC02A300F7329F /* Images.xcassets */; };
 		1894011B1BFC02A300F7329F /* ____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894011A1BFC02A300F7329F /* ____Tests.m */; };
+		189A5E851CC923E500798D61 /* ChangeNickVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 189A5E841CC923E500798D61 /* ChangeNickVC.m */; };
 		18B431401C905B0900255293 /* AddFriendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B4313F1C905B0900255293 /* AddFriendVC.m */; };
 		18B431E91C9160C600255293 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B431E61C9160C600255293 /* Conversation.storyboard */; };
 		18B431EA1C9160C600255293 /* ConversationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B431E81C9160C600255293 /* ConversationVC.m */; };
@@ -263,6 +264,8 @@
 		189401141BFC02A300F7329F /* 未名管家Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "未名管家Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		189401191BFC02A300F7329F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1894011A1BFC02A300F7329F /* ____Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "____Tests.m"; sourceTree = "<group>"; };
+		189A5E831CC923E500798D61 /* ChangeNickVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickVC.h; sourceTree = "<group>"; };
+		189A5E841CC923E500798D61 /* ChangeNickVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickVC.m; sourceTree = "<group>"; };
 		18A193F31BFF5CB900BE8E6E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		18B4313E1C905B0900255293 /* AddFriendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendVC.h; sourceTree = "<group>"; };
 		18B4313F1C905B0900255293 /* AddFriendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendVC.m; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 				187B36BC1C8475FA0090D966 /* SettingsVC.m */,
 				1868CAC11CB518E10069B787 /* UserDetailVC.h */,
 				1868CAC21CB518E10069B787 /* UserDetailVC.m */,
+				189A5E831CC923E500798D61 /* ChangeNickVC.h */,
+				189A5E841CC923E500798D61 /* ChangeNickVC.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -922,6 +927,7 @@
 				1871CD861C979D4A003923C2 /* NSArray+MASAdditions.m in Sources */,
 				18B431F91C9168C800255293 /* ChatVC.m in Sources */,
 				1871CDD41C97C1AA003923C2 /* NSData+ImageContentType.m in Sources */,
+				189A5E851CC923E500798D61 /* ChangeNickVC.m in Sources */,
 				1871CD941C97C0C4003923C2 /* XMGTimeTool.m in Sources */,
 				1871CDAF1C97C15E003923C2 /* EMCDDeviceManager+Remind.m in Sources */,
 				1871CDD91C97C1AA003923C2 /* SDWebImageDownloaderOperation.m in Sources */,

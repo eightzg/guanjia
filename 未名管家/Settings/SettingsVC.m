@@ -7,8 +7,11 @@
 //
 
 #import "SettingsVC.h"
+#import "UserDetailVC.h"
+
 #import <EaseMobSDKFull/EaseMob.h>
 #import <BmobSDK/BmobUser.h>
+#import <BmobQuery.h>
 
 @interface SettingsVC () <EMChatManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
@@ -23,6 +26,8 @@
     [super viewDidLoad];
 //    NSString *loginUsername = [[EaseMob sharedInstance].chatManager loginInfo][@"username"];
     
+
+    
     BmobUser *bUser = [BmobUser getCurrentUser];
     self.navigationItem.title = bUser.username;
     
@@ -35,11 +40,30 @@
     [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    BmobQuery *bquery = [BmobQuery queryWithClassName:@"Nick"];
+    //查找GameScore表的数据
+    [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        if (error) {
+            NSLog(@"error is:%@",error);
+        } else{
+            NSDictionary *dict = [array lastObject];
+            self.nickName.text = [dict objectForKey:@"nickName"];
+            [self setNeedsStatusBarAppearanceUpdate];
+        }
+    }];
+}
+
 
 
 #pragma mark - Table view data source
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UserDetailVC *detail =  segue.destinationViewController;
+    detail.nick = self.nickName.text;
 }
 
 
