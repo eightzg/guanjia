@@ -42,14 +42,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"Nick"];
-    //查找GameScore表的数据
+    //查找Nick表的数据
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         if (error) {
             NSLog(@"error is:%@",error);
         } else{
             NSDictionary *dict = [array lastObject];
             self.nickName.text = [dict objectForKey:@"nickName"];
-            [self setNeedsStatusBarAppearanceUpdate];
         }
     }];
 }

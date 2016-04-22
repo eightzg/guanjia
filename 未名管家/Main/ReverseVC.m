@@ -50,6 +50,8 @@
 @property (nonatomic, strong) UIColor *currentColor;
 /** 历史会话记录,用来在第二个tab显示badge */
 @property (nonatomic, strong) NSArray *conversations;
+/** 用户昵称 */
+@property (nonatomic, copy) NSString *nickName;
 
 @end
 
@@ -60,8 +62,9 @@ static NSString * const ID = @"cell";
     [super viewDidLoad];
     //初始化当前页码
     self.weekNum = 0;
-    //查询数据库
-    [self getDataFromBmob];
+    //从数据库中查询预定信息
+    [self getTimeFromBmob];
+    
     //监听数据改变
     [self listen];
     //设置会话监听的代理
@@ -198,8 +201,8 @@ static NSString * const ID = @"cell";
     }];
 }
 
-//从数据库查询
-- (void)getDataFromBmob {
+//从数据库查询预定信息
+- (void)getTimeFromBmob {
     
     self.currentColor = [UIColor randomColor];
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"Time"];
@@ -213,6 +216,7 @@ static NSString * const ID = @"cell";
         }
     }];
 }
+
 
 #pragma mark - BmobEvent Delegate
 
@@ -233,7 +237,7 @@ static NSString * const ID = @"cell";
 //接收到得数据
 -(void)bmobEvent:(BmobEvent *)event didReceiveMessage:(NSString *)message{
     //更新数据
-    [self getDataFromBmob];
+    [self getTimeFromBmob];
 }
 
 #pragma mark - tag转row&col row&col转tag
@@ -300,8 +304,24 @@ static NSString * const ID = @"cell";
                 currentTag = [self tagFromRow:row andCol:7];
             }
             
-            //用户名和原因
+//            NSString *content = [[NSString alloc] init];
+//            if (self.nickName != nil) {
+//                //显示昵称和原因
+//                content = [NSString stringWithFormat:@"%@\n%@",self.nickName,[dict objectForKey:@"reason"]];
+//            }else {
+//                //显示用户名和原图
+//                content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];
+//            }
+            BmobQuery *bquery = [BmobQuery queryWithClassName:@"Nick"];
+            
+            [bquery whereKeyExists:self.user];
+            [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+                NSLog(@"array------%@",array);
+            }];
+            
             NSString *content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];
+            
+
             if (indexPath.item == currentTag) {
                 cell.commonLabel.text = content;
             }

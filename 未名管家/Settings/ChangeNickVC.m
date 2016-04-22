@@ -13,7 +13,10 @@
 
 @interface ChangeNickVC ()
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-
+/**
+ *  用户的昵称
+ */
+@property (nonatomic, copy) NSString *nickName;
 @end
 
 @implementation ChangeNickVC
@@ -32,8 +35,14 @@
         self.block(self.textField.text);
     }
     //2，保存到服务器
-    BmobUser *bUser = [BmobUser getCurrentUser];
+    [self saveNickName];
     
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)saveNickName {
+    BmobUser *bUser = [BmobUser getCurrentUser];
     BmobObject *nickObj = [[BmobObject alloc] initWithClassName:@"Nick"];
     [nickObj setObject:bUser.username forKey:@"userName"];
     [nickObj setObject:self.textField.text forKey:@"nickName"];
@@ -47,9 +56,8 @@
             NSLog(@"Unknow error");
         }
     }];
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 
 @end
