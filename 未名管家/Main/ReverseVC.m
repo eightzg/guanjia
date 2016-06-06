@@ -192,7 +192,7 @@ static NSString * const ID = @"cell";
     [timeObj saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
         if (isSuccessful) {
             //打印objectId
-            NSLog(@"objectid :%@",timeObj);
+//            NSLog(@"objectid :%@",timeObj);
         } else if (error){
             NSLog(@"%@",error);
         } else {
@@ -316,7 +316,7 @@ static NSString * const ID = @"cell";
             
             [bquery whereKeyExists:self.user];
             [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-                NSLog(@"array------%@",array);
+//                NSLog(@"array------%@",array);
             }];
             
             NSString *content = [NSString stringWithFormat:@"%@\n%@",[dict objectForKey:@"userName"],[dict objectForKey:@"reason"]];

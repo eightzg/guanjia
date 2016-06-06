@@ -177,6 +177,9 @@
                                             <constraint firstAttribute="height" constant="30" id="mUc-us-d8n"/>
                                         </constraints>
                                         <state key="normal" image="chatBar_face"/>
+                                        <connections>
+                                            <action selector="faceBtnClicked:" destination="kxw-uA-iJh" eventType="touchUpInside" id="hLC-DE-4Ji"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fN8-OY-Ztj" userLabel="moreBtn">
                                         <rect key="frame" x="282" y="8" width="30" height="30"/>

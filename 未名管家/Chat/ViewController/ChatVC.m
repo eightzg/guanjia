@@ -331,6 +331,9 @@
 
 
 #pragma mark - Action
+- (IBAction)faceBtnClicked:(id)sender {
+    HKLog(@"表情按钮点击");
+}
 
 - (IBAction)voiceAction:(UIButton *)sender {
     

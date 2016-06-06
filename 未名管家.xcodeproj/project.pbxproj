@@ -54,6 +54,9 @@
 		1871CDF51C97C220003923C2 /* EMVoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1871CDEA1C97C220003923C2 /* EMVoiceConverter.mm */; };
 		1871CDF61C97C220003923C2 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1871CDEE1C97C220003923C2 /* libopencore-amrnb.a */; };
 		1871CDF71C97C220003923C2 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1871CDF21C97C220003923C2 /* libopencore-amrwb.a */; };
+		187542EA1D054A8A008A87FA /* EmotionKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542E91D054A8A008A87FA /* EmotionKeyboard.m */; };
+		187542ED1D054A9B008A87FA /* EmotionTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542EC1D054A9B008A87FA /* EmotionTabBar.m */; };
+		187542F01D054AAB008A87FA /* EmotionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542EF1D054AAB008A87FA /* EmotionListView.m */; };
 		187B36BA1C8474800090D966 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187B36B91C8474800090D966 /* Settings.storyboard */; };
 		187B36BD1C8475FA0090D966 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B36BC1C8475FA0090D966 /* SettingsVC.m */; };
 		187B36CB1C847D810090D966 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B36C31C847D810090D966 /* HistoryCell.m */; };
@@ -214,6 +217,12 @@
 		1871CDF11C97C220003923C2 /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
 		1871CDF21C97C220003923C2 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		1871CDFA1C97C2D0003923C2 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		187542E81D054A8A008A87FA /* EmotionKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionKeyboard.h; sourceTree = "<group>"; };
+		187542E91D054A8A008A87FA /* EmotionKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionKeyboard.m; sourceTree = "<group>"; };
+		187542EB1D054A9B008A87FA /* EmotionTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionTabBar.h; sourceTree = "<group>"; };
+		187542EC1D054A9B008A87FA /* EmotionTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionTabBar.m; sourceTree = "<group>"; };
+		187542EE1D054AAB008A87FA /* EmotionListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionListView.h; sourceTree = "<group>"; };
+		187542EF1D054AAB008A87FA /* EmotionListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionListView.m; sourceTree = "<group>"; };
 		187B36B91C8474800090D966 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		187B36BB1C8475FA0090D966 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		187B36BC1C8475FA0090D966 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
@@ -679,6 +688,12 @@
 				1871CD8A1C97C098003923C2 /* XMGChatCell.m */,
 				1871CD8B1C97C098003923C2 /* XMGTimeCell.h */,
 				1871CD8C1C97C098003923C2 /* XMGTimeCell.m */,
+				187542E81D054A8A008A87FA /* EmotionKeyboard.h */,
+				187542E91D054A8A008A87FA /* EmotionKeyboard.m */,
+				187542EB1D054A9B008A87FA /* EmotionTabBar.h */,
+				187542EC1D054A9B008A87FA /* EmotionTabBar.m */,
+				187542EE1D054AAB008A87FA /* EmotionListView.h */,
+				187542EF1D054AAB008A87FA /* EmotionListView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -887,6 +902,7 @@
 				18F0A3BB1C89B84900D5C82D /* BaseTabBarController.m in Sources */,
 				18F0A3C11C89C43000D5C82D /* ContactsVC.m in Sources */,
 				1871CD8D1C97C098003923C2 /* XMGChatCell.m in Sources */,
+				187542F01D054AAB008A87FA /* EmotionListView.m in Sources */,
 				187B37051C847EF50090D966 /* UIColor+Random.m in Sources */,
 				1871CD871C979D4A003923C2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1871CDAB1C97C15E003923C2 /* EMAudioRecorderUtil.m in Sources */,
@@ -905,6 +921,7 @@
 				1871CDD51C97C1AA003923C2 /* SDImageCache.m in Sources */,
 				1871CDD61C97C1AA003923C2 /* SDWebImageCompat.m in Sources */,
 				1871CDAC1C97C15E003923C2 /* EMCDDeviceManager+Media.m in Sources */,
+				187542ED1D054A9B008A87FA /* EmotionTabBar.m in Sources */,
 				1871CDDB1C97C1AA003923C2 /* SDWebImagePrefetcher.m in Sources */,
 				1871CDDE1C97C1AA003923C2 /* UIImage+MultiFormat.m in Sources */,
 				1871CDD71C97C1AA003923C2 /* SDWebImageDecoder.m in Sources */,
@@ -933,6 +950,7 @@
 				1871CDD91C97C1AA003923C2 /* SDWebImageDownloaderOperation.m in Sources */,
 				187B36CF1C847D810090D966 /* ReverseVC.m in Sources */,
 				1871CDD81C97C1AA003923C2 /* SDWebImageDownloader.m in Sources */,
+				187542EA1D054A8A008A87FA /* EmotionKeyboard.m in Sources */,
 				187B37011C847EF50090D966 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
