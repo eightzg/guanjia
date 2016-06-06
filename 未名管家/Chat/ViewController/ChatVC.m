@@ -15,6 +15,7 @@
 #import "XMGTimeCell.h"
 #import "XMGTimeTool.h"
 #import "GifView.h"
+#import "EmotionKeyboard.h"
 
 
 
@@ -48,6 +49,15 @@
 @property (nonatomic, assign) int number;
 @property (nonatomic, strong) GifView *gifView;
 
+/** 表情键盘 */
+@property (nonatomic, strong) EmotionKeyboard *emotionKeyboard;
+/** 是否正在切换键盘 */
+@property (nonatomic, assign) BOOL switchingKeybaord;
+/**
+ *  表情按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
+
 
 @end
 
@@ -55,12 +65,24 @@
 
 @implementation ChatVC
 
--(NSMutableArray *)dataSources{
+#pragma mark - 懒加载方法
+- (NSMutableArray *)dataSources
+{
     if (!_dataSources) {
         _dataSources = [NSMutableArray array];
     }
     
     return _dataSources;
+}
+
+- (EmotionKeyboard *)emotionKeyboard
+{
+    if (!_emotionKeyboard) {
+        self.emotionKeyboard = [[EmotionKeyboard alloc] init];
+        self.emotionKeyboard.width = self.view.width;
+        self.emotionKeyboard.height = 216;
+    }
+    return _emotionKeyboard;
 }
 
 - (void)viewDidLoad {
@@ -91,12 +113,7 @@
     // 加载与当前聊天用户所有聊天记录
     NSArray *messages = [conversation loadAllMessages];
     
-    //    for (id obj in messages) {
-    //        NSLog(@"%@",[obj class]);
-    //    }
-    
     // 添加到数据源
-    //    [self.dataSources addObjectsFromArray:messages];
     for (EMMessage *msgObj in messages) {
         [self addDataSourcesWithMessage:msgObj];
     }
@@ -212,6 +229,7 @@
     }
     
     // 3.调整整个InputToolBar 高度
+    if(self.switchingKeybaord) return;
     self.inputToolBarHegihtConstraint.constant = 6 + 7 + textViewH;
     // 加个动画
     [UIView animateWithDuration:0.25 animations:^{
@@ -333,6 +351,39 @@
 #pragma mark - Action
 - (IBAction)faceBtnClicked:(id)sender {
     HKLog(@"表情按钮点击");
+    [self switchKeyboard];
+}
+
+/**
+ *  切换键盘
+ */
+- (void)switchKeyboard {
+    if (self.textView.inputView == nil) { // 切换为自定义的表情键盘
+        self.textView.inputView = self.emotionKeyboard;
+        //切换按钮为键盘
+        [self.faceBtn setImage:[UIImage imageNamed:@"keyboard_normal"] forState:UIControlStateNormal];
+        [self.faceBtn setImage:[UIImage imageNamed:@"keyboard_highlighted"] forState:UIControlStateHighlighted];
+    } else { // 切换为系统自带的键盘
+        self.textView.inputView = nil;
+        
+        //切换按钮为表情
+        [self.faceBtn setImage:[UIImage imageNamed:@"chat_bottom_smile_nor"] forState:UIControlStateNormal];
+        [self.faceBtn setImage:[UIImage imageNamed:@"chat_bottom_smile_press"] forState:UIControlStateHighlighted];
+    }
+
+    // 开始切换键盘
+    self.switchingKeybaord = YES;
+    
+    // 退出键盘
+    [self.textView endEditing:YES];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 弹出键盘
+        [self.textView becomeFirstResponder];
+        
+        // 结束切换键盘
+        self.switchingKeybaord = NO;
+    });
 }
 
 - (IBAction)voiceAction:(UIButton *)sender {

@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EmotionTabBar : UIView
+typedef enum {
+    EmotionTabBarButtonTypeRecent, // 最近
+    EmotionTabBarButtonTypeDefault, // 默认
+    EmotionTabBarButtonTypeEmoji, // emoji
+    EmotionTabBarButtonTypeLxh, // 浪小花
+} EmotionTabBarButtonType;
 
+@class EmotionTabBar;
+
+@protocol EmotionTabBarDelegate <NSObject>
+
+@optional
+- (void)emotionTabBar:(EmotionTabBar *)tabBar didSelectButton:(EmotionTabBarButtonType)buttonType;
+@end
+
+@interface EmotionTabBar : UIView
+@property (nonatomic, weak) id<EmotionTabBarDelegate> delegate;
 @end

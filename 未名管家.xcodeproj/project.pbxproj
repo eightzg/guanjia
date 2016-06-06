@@ -57,6 +57,7 @@
 		187542EA1D054A8A008A87FA /* EmotionKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542E91D054A8A008A87FA /* EmotionKeyboard.m */; };
 		187542ED1D054A9B008A87FA /* EmotionTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542EC1D054A9B008A87FA /* EmotionTabBar.m */; };
 		187542F01D054AAB008A87FA /* EmotionListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542EF1D054AAB008A87FA /* EmotionListView.m */; };
+		187542F31D05BB61008A87FA /* EmotionTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 187542F21D05BB61008A87FA /* EmotionTabBarButton.m */; };
 		187B36BA1C8474800090D966 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187B36B91C8474800090D966 /* Settings.storyboard */; };
 		187B36BD1C8475FA0090D966 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B36BC1C8475FA0090D966 /* SettingsVC.m */; };
 		187B36CB1C847D810090D966 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187B36C31C847D810090D966 /* HistoryCell.m */; };
@@ -223,6 +224,8 @@
 		187542EC1D054A9B008A87FA /* EmotionTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionTabBar.m; sourceTree = "<group>"; };
 		187542EE1D054AAB008A87FA /* EmotionListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionListView.h; sourceTree = "<group>"; };
 		187542EF1D054AAB008A87FA /* EmotionListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionListView.m; sourceTree = "<group>"; };
+		187542F11D05BB61008A87FA /* EmotionTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionTabBarButton.h; sourceTree = "<group>"; };
+		187542F21D05BB61008A87FA /* EmotionTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionTabBarButton.m; sourceTree = "<group>"; };
 		187B36B91C8474800090D966 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		187B36BB1C8475FA0090D966 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		187B36BC1C8475FA0090D966 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
@@ -692,6 +695,8 @@
 				187542E91D054A8A008A87FA /* EmotionKeyboard.m */,
 				187542EB1D054A9B008A87FA /* EmotionTabBar.h */,
 				187542EC1D054A9B008A87FA /* EmotionTabBar.m */,
+				187542F11D05BB61008A87FA /* EmotionTabBarButton.h */,
+				187542F21D05BB61008A87FA /* EmotionTabBarButton.m */,
 				187542EE1D054AAB008A87FA /* EmotionListView.h */,
 				187542EF1D054AAB008A87FA /* EmotionListView.m */,
 			);
@@ -902,6 +907,7 @@
 				18F0A3BB1C89B84900D5C82D /* BaseTabBarController.m in Sources */,
 				18F0A3C11C89C43000D5C82D /* ContactsVC.m in Sources */,
 				1871CD8D1C97C098003923C2 /* XMGChatCell.m in Sources */,
+				187542F31D05BB61008A87FA /* EmotionTabBarButton.m in Sources */,
 				187542F01D054AAB008A87FA /* EmotionListView.m in Sources */,
 				187B37051C847EF50090D966 /* UIColor+Random.m in Sources */,
 				1871CD871C979D4A003923C2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

@@ -255,6 +255,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="faceBtn" destination="xq1-Hu-FOr" id="Kwn-uX-lnY"/>
                         <outlet property="inputToolBarBottomConstraint" destination="aeN-Me-YMi" id="DFf-X0-Hrs"/>
                         <outlet property="inputToolBarHegihtConstraint" destination="6W9-XA-zbX" id="Dtq-9J-bBh"/>
                         <outlet property="recordBtn" destination="Enw-s3-gcW" id="PyG-il-7YT"/>
