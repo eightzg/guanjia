@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupBtn:@"最近" buttonType:EmotionTabBarButtonTypeRecent];
+        [self setupBtn:NSLocalizedString(@"recent", nil) buttonType:EmotionTabBarButtonTypeRecent];
         [self setupBtn:@"默认" buttonType:EmotionTabBarButtonTypeDefault];
         //        [self btnClick:[self setupBtn:@"默认" buttonType:HWEmotionTabBarButtonTypeDefault]];
         [self setupBtn:@"Emoji" buttonType:EmotionTabBarButtonTypeEmoji];
